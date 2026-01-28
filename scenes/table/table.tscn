@@ -26,7 +26,7 @@ shape = SubResource("RectangleShape2D_o7ca4")
 [node name="TraySlot1" type="Area2D" parent="."]
 position = Vector2(90, 81)
 collision_layer = 4
-collision_mask = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot1"]
 shape = SubResource("CircleShape2D_qavd0")
@@ -34,7 +34,7 @@ shape = SubResource("CircleShape2D_qavd0")
 [node name="TraySlot2" type="Area2D" parent="."]
 position = Vector2(0, 81)
 collision_layer = 4
-collision_mask = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot2"]
 shape = SubResource("CircleShape2D_qavd0")
@@ -42,7 +42,7 @@ shape = SubResource("CircleShape2D_qavd0")
 [node name="TraySlot3" type="Area2D" parent="."]
 position = Vector2(-90, 81)
 collision_layer = 4
-collision_mask = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot3"]
 shape = SubResource("CircleShape2D_qavd0")
@@ -50,7 +50,7 @@ shape = SubResource("CircleShape2D_qavd0")
 [node name="TraySlot4" type="Area2D" parent="."]
 position = Vector2(-90, 36)
 collision_layer = 4
-collision_mask = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot4"]
 shape = SubResource("CircleShape2D_qavd0")
@@ -58,7 +58,7 @@ shape = SubResource("CircleShape2D_qavd0")
 [node name="TraySlot5" type="Area2D" parent="."]
 position = Vector2(0, 36)
 collision_layer = 4
-collision_mask = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot5"]
 shape = SubResource("CircleShape2D_qavd0")
@@ -66,7 +66,7 @@ shape = SubResource("CircleShape2D_qavd0")
 [node name="TraySlot6" type="Area2D" parent="."]
 position = Vector2(90, 36)
 collision_layer = 4
-collision_mask = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot6"]
 shape = SubResource("CircleShape2D_qavd0")

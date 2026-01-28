@@ -63,16 +63,18 @@ func _physics_process(_delta):
 
 		# parents() /main/PlantTrayN or /Table/TraySlotN
 		if (collider.get_parent().get_name() == "Table"):
-			hit_tray_slot = collider
-			if carryTray && clearCarry:
-				carryTray.material.set('shader_parameter/line_color', canDropShader)
-			smartPrint(2, collider.get_name())
-		
+			var slot_occupied = collider.has_overlapping_bodies()
+			if !slot_occupied:
+				hit_tray_slot = collider
+				if carryTray && clearCarry:
+					carryTray.material.set('shader_parameter/line_color', canDropShader)
+			smartPrint(2, collider.get_name() + (" (occupied)" if slot_occupied else ""))
+
 		# children() Tray /PlantTray/PlantSprite or Table /Table/TableSprite
 		elif collider.has_node("PlantSprite"):
 			hit_plant_sprite = collider.get_node("PlantSprite")
-			hit_plant_sprite.use_parent_material = true
 			if !carryTray:
+				hit_plant_sprite.use_parent_material = true
 				smartPrint(2, "not carrying tray")
 				if select_action:
 					carryTray = collider
