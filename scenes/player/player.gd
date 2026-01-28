@@ -17,6 +17,7 @@ var last_pos = Vector2.ZERO
 var collided = 0
 var carryTray # null if Player is not carrying. Otherwise plantTray object being caried
 var clearCarry = false # true once tray has cleared the table and player is carrying
+var dropTrayOffset = Vector2(0, 11)
 var carryTrayDown = Vector2(0, 30) # relative offsets to player sprite
 var carryTrayUp = Vector2(0, -5)
 var canCarryShader = Vector4(0.976, 0.514, 0.208, 1.00) #orange
@@ -128,10 +129,7 @@ func _physics_process(_delta):
 			if (hit_tray_slot):
 				smartPrint(2, "drop tray")
 				carryTray.use_parent_material = false
-				if last_dir == Vector2.UP:
-					carryTray.position = self.position + carryTrayUp + Vector2(0, -14)
-				elif last_dir == Vector2.DOWN:
-					carryTray.position = self.position + carryTrayDown + Vector2(0, 20)
+				carryTray.global_position = hit_tray_slot.global_position + dropTrayOffset
 				carryTray.set_collision_layer_value(2, true)
 				carryTray.material.set('shader_parameter/line_color', canCarryShader)
 				carryTray = null

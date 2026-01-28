@@ -32,13 +32,13 @@ texture_filter = 1
 position = Vector2(202, 152)
 
 [node name="PlantTray1" parent="." instance=ExtResource("4_jyhfs")]
-position = Vector2(198, 289)
+position = Vector2(193, 287)
 
 [node name="PlantTray2" parent="." instance=ExtResource("4_jyhfs")]
-position = Vector2(199, 241)
+position = Vector2(193, 243)
 
 [node name="PlantTray3" parent="." instance=ExtResource("4_jyhfs")]
-position = Vector2(103, 286)
+position = Vector2(103, 287)
 
 [node name="PlantTray4" parent="." instance=ExtResource("4_jyhfs")]
 position = Vector2(103, 243)
