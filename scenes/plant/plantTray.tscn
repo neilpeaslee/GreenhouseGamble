@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://dfsype17kbqyx"]
+
+[ext_resource type="Shader" uid="uid://1dpv7xbwwr7u" path="res://assets/shaders/outline.gdshader" id="1_v5b01"]
+[ext_resource type="Texture2D" uid="uid://b4l2oxxx6vyxi" path="res://assets/sprites/plant/plant-trays_3x.png" id="2_otpf8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nskgh"]
+shader = ExtResource("1_v5b01")
+shader_parameter/line_color = Color(0.976, 0.514, 0.208, 1)
+shader_parameter/line_thickness = 3.0000001425
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5b01"]
+atlas = ExtResource("2_otpf8")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nskgh"]
+atlas = ExtResource("2_otpf8")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2k5kj"]
+atlas = ExtResource("2_otpf8")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0d3y2"]
+atlas = ExtResource("2_otpf8")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hd61i"]
+atlas = ExtResource("2_otpf8")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxjct"]
+atlas = ExtResource("2_otpf8")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lwn14"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5b01")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nskgh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2k5kj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0d3y2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hd61i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxjct")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_efp8c"]
+size = Vector2(87, 43)
+
+[node name="PlantTray" type="StaticBody2D"]
+y_sort_enabled = true
+texture_filter = 1
+material = SubResource("ShaderMaterial_nskgh")
+collision_layer = 2
+collision_mask = 0
+
+[node name="PlantSprite" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_lwn14")
+offset = Vector2(0, -38)
+
+[node name="CollisionPlantTray" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0.5, -12.5)
+shape = SubResource("RectangleShape2D_efp8c")

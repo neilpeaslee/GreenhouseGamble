@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://btqh10hb33iq6"]
+
+[ext_resource type="Texture2D" uid="uid://bc4mprhx67bhr" path="res://assets/sprites/table/Table_6x3-3x.png" id="1_qavd0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7ca4"]
+size = Vector2(284, 88)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qavd0"]
+radius = 15.0
+
+[node name="Table" type="StaticBody2D"]
+texture_filter = 1
+collision_mask = 0
+
+[node name="TableSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+texture = ExtResource("1_qavd0")
+offset = Vector2(0, 75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 67)
+shape = SubResource("RectangleShape2D_o7ca4")
+
+[node name="TraySlot1" type="Area2D" parent="."]
+position = Vector2(95, 81)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot1"]
+shape = SubResource("CircleShape2D_qavd0")
+
+[node name="TraySlot2" type="Area2D" parent="."]
+position = Vector2(-1, 81)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot2"]
+shape = SubResource("CircleShape2D_qavd0")
+
+[node name="TraySlot3" type="Area2D" parent="."]
+position = Vector2(-91, 81)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot3"]
+shape = SubResource("CircleShape2D_qavd0")
+
+[node name="TraySlot4" type="Area2D" parent="."]
+position = Vector2(-91, 31)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot4"]
+shape = SubResource("CircleShape2D_qavd0")
+
+[node name="TraySlot5" type="Area2D" parent="."]
+position = Vector2(-1, 32)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot5"]
+shape = SubResource("CircleShape2D_qavd0")
+
+[node name="TraySlot6" type="Area2D" parent="."]
+position = Vector2(94, 32)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot6"]
+shape = SubResource("CircleShape2D_qavd0")
