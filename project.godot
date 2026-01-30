@@ -15,6 +15,10 @@ run/main_scene="uid://dfaskvnmo86ln"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+UIManager="*res://scenes/managers/ui_manager.gd"
+
 [display]
 
 window/size/viewport_width=768
@@ -63,7 +67,3 @@ ui_down={
 2d_navigation/layer_2="PlantTrays"
 2d_physics/layer_3="TableTraySlots"
 2d_navigation/layer_3="TableTraySlots"
-
-[autoload]
-
-UIManager="*res://scenes/managers/ui_manager.gd"

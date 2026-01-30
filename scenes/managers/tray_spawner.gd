@@ -15,16 +15,31 @@ signal spawn_failed(reason: String)
 @export var max_trays_on_spawn_table: int = 6
 
 var _spawn_timer: float = 0.0
+var _countdown_active: bool = false
+var _spawn_paused: bool = false
 
 func _ready() -> void:
 	if plant_tray_scene == null:
 		push_warning("TraySpawner: plant_tray_scene not assigned")
+	if spawn_table:
+		spawn_table.tray_removed.connect(_on_spawn_table_tray_removed)
 
 func _process(delta: float) -> void:
 	if not auto_spawn_enabled:
+		if _countdown_active:
+			UIManager.stop_countdown()
+			_countdown_active = false
+		return
+
+	if _spawn_paused:
 		return
 
 	_spawn_timer += delta
+
+	var time_remaining = auto_spawn_interval - _spawn_timer
+	UIManager.update_countdown(time_remaining, "Next spawn in:")
+	_countdown_active = true
+
 	if _spawn_timer >= auto_spawn_interval:
 		_spawn_timer = 0.0
 		try_auto_spawn()
@@ -33,6 +48,11 @@ func try_auto_spawn() -> void:
 	if spawn_table == null:
 		return
 	if spawn_table.get_tray_count() >= max_trays_on_spawn_table:
+		spawn_failed.emit("No empty slots on spawn table")
+		UIManager.show_toast("No empty slots on spawn table")
+		_spawn_paused = true
+		UIManager.stop_countdown()
+		_countdown_active = false
 		return
 	spawn_tray()
 
@@ -95,4 +115,14 @@ func get_spawn_table() -> Table:
 	return spawn_table
 
 func set_spawn_table(table: Table) -> void:
+	if spawn_table and spawn_table.tray_removed.is_connected(_on_spawn_table_tray_removed):
+		spawn_table.tray_removed.disconnect(_on_spawn_table_tray_removed)
 	spawn_table = table
+	if spawn_table:
+		spawn_table.tray_removed.connect(_on_spawn_table_tray_removed)
+
+
+func _on_spawn_table_tray_removed(_table: Table, _slot: Area2D, _tray: PlantTray) -> void:
+	if _spawn_paused and auto_spawn_enabled:
+		_spawn_paused = false
+		_spawn_timer = 0.0

@@ -29,6 +29,7 @@ var smartString = ["", "", "", "", ""] # debugging
 
 func _ready():
 	playerSprite = $Sprite
+	 
 	ray = $TrayRay
 	UIManager.show_message("Start Game", "Go")
 	
