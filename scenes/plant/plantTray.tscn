@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://dfsype17kbqyx"]
+[gd_scene load_steps=13 format=3 uid="uid://dfsype17kbqyx"]
 
+[ext_resource type="Script" uid="uid://cnbdaq17swpmb" path="res://scenes/plant/plant_tray.gd" id="1_plant"]
 [ext_resource type="Shader" uid="uid://1dpv7xbwwr7u" path="res://assets/shaders/outline.gdshader" id="1_v5b01"]
 [ext_resource type="Texture2D" uid="uid://b4l2oxxx6vyxi" path="res://assets/sprites/plant/plant-trays_3x.png" id="2_otpf8"]
 
@@ -67,6 +68,7 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_nskgh")
 collision_layer = 2
 collision_mask = 0
+script = ExtResource("1_plant")
 
 [node name="PlantSprite" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true

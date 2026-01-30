@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://btqh10hb33iq6"]
+[gd_scene load_steps=5 format=3 uid="uid://btqh10hb33iq6"]
 
 [ext_resource type="Texture2D" uid="uid://bc4mprhx67bhr" path="res://assets/sprites/table/Table_6x3-3x.png" id="1_qavd0"]
+[ext_resource type="Script" uid="uid://b8s6g4rg38d26" path="res://scenes/table/table.gd" id="1_table"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o7ca4"]
 size = Vector2(284, 88)
@@ -11,6 +12,7 @@ radius = 15.0
 [node name="Table" type="StaticBody2D"]
 texture_filter = 1
 collision_mask = 0
+script = ExtResource("1_table")
 
 [node name="TableSprite" type="Sprite2D" parent="."]
 y_sort_enabled = true

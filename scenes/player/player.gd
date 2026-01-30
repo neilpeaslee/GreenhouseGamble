@@ -62,8 +62,9 @@ func _physics_process(_delta):
 		smartPrint(1, "ray is colliding with: "+collider.get_path().get_concatenated_names())
 
 		# parents() /main/PlantTrayN or /Table/TraySlotN
-		if (collider.get_parent().get_name() == "Table"):
-			var slot_occupied = collider.has_overlapping_bodies()
+		if (collider.get_parent() is Table):
+			var table: Table = collider.get_parent()
+			var slot_occupied = table.is_slot_occupied(collider)
 			if !slot_occupied:
 				hit_tray_slot = collider
 				if carryTray && clearCarry:
@@ -81,6 +82,11 @@ func _physics_process(_delta):
 					smartPrint(2, "pick up tray")
 					select_action = false
 					carryTray.set_collision_layer_value(2, false) # prevent future hits on carried tray
+					# Notify table that tray was removed
+					if carryTray.has_method("get_current_table"):
+						var tray_table = carryTray.get_current_table()
+						if tray_table:
+							tray_table.remove_tray(carryTray)
 			else:
 				smartPrint(2, "carrying tray")
 	
@@ -134,6 +140,9 @@ func _physics_process(_delta):
 				carryTray.global_position = hit_tray_slot.global_position + dropTrayOffset
 				carryTray.set_collision_layer_value(2, true)
 				carryTray.material.set('shader_parameter/line_color', canCarryShader)
+				# Notify table that tray was placed
+				var drop_table: Table = hit_tray_slot.get_parent()
+				drop_table.place_tray_in_slot(hit_tray_slot, carryTray)
 				carryTray = null
 			else:
 				print("can only drop tray on table")

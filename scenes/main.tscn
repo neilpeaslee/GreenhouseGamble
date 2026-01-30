@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://dfaskvnmo86ln"]
+[gd_scene load_steps=6 format=4 uid="uid://dfaskvnmo86ln"]
 
 [ext_resource type="TileSet" uid="uid://ceo4a6utj2jqd" path="res://assets/sprites/ground/ground.tres" id="1_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://btqh10hb33iq6" path="res://scenes/table/table.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://ch7qdtt2l6r1f" path="res://scenes/player/player.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://dfsype17kbqyx" path="res://scenes/plant/plantTray.tscn" id="4_jyhfs"]
+[ext_resource type="Script" uid="uid://0dxoavc0ak67" path="res://scenes/managers/tray_spawner.gd" id="5_spawner"]
 
 [node name="main" type="Node2D"]
 y_sort_enabled = true
@@ -24,21 +25,38 @@ tile_set = ExtResource("1_tbgi4")
 y_sort_enabled = true
 texture_filter = 1
 
-[node name="Table" parent="TableGroup" instance=ExtResource("2_0wfyh")]
-position = Vector2(193, 196)
+[node name="Table1" parent="TableGroup" instance=ExtResource("2_0wfyh")]
+position = Vector2(575, 195)
+light_level = 1.2
+temperature = 22.0
+
+[node name="Table2" parent="TableGroup" instance=ExtResource("2_0wfyh")]
+position = Vector2(575, 50)
+table_id = 2
+light_level = 0.8
+temperature = 18.0
+humidity = 0.7
+
+[node name="Table3" parent="TableGroup" instance=ExtResource("2_0wfyh")]
+position = Vector2(190, 50)
+table_id = 3
+light_level = 1.5
+temperature = 25.0
+humidity = 0.3
+
+[node name="Table4" parent="TableGroup" instance=ExtResource("2_0wfyh")]
+position = Vector2(190, 195)
+table_id = 4
+light_level = 0.6
+temperature = 15.0
+humidity = 0.9
 
 [node name="Player" parent="." instance=ExtResource("3_sugp2")]
 texture_filter = 1
-position = Vector2(202, 152)
+position = Vector2(384, 250)
 
-[node name="PlantTray1" parent="." instance=ExtResource("4_jyhfs")]
-position = Vector2(193, 287)
-
-[node name="PlantTray2" parent="." instance=ExtResource("4_jyhfs")]
-position = Vector2(193, 243)
-
-[node name="PlantTray3" parent="." instance=ExtResource("4_jyhfs")]
-position = Vector2(103, 287)
-
-[node name="PlantTray4" parent="." instance=ExtResource("4_jyhfs")]
-position = Vector2(103, 243)
+[node name="TraySpawner" type="Node" parent="." node_paths=PackedStringArray("spawn_table")]
+script = ExtResource("5_spawner")
+plant_tray_scene = ExtResource("4_jyhfs")
+spawn_table = NodePath("../TableGroup/Table1")
+auto_spawn_enabled = true
