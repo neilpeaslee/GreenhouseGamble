@@ -48,6 +48,7 @@ func spawn_tray() -> PlantTray:
 	var empty_slots = spawn_table.get_empty_slots()
 	if empty_slots.is_empty():
 		spawn_failed.emit("No empty slots on spawn table")
+		UIManager.show_toast("No empty slots on spawn table")
 		return null
 
 	# Spawn in the first empty slot

@@ -63,3 +63,7 @@ ui_down={
 2d_navigation/layer_2="PlantTrays"
 2d_physics/layer_3="TableTraySlots"
 2d_navigation/layer_3="TableTraySlots"
+
+[autoload]
+
+UIManager="*res://scenes/managers/ui_manager.gd"
