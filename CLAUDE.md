@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Greenhouse Gamble is a 2D top-down retro pixel greenhouse/farmstead simulator built with Godot 4.5 using GDScript.
+Greenhouse Gamble is a 2D top-down retro pixel greenhouse/farmstead simulator built with Godot 4.5 using GDScript. Win by filling all table slots with fully grown plants.
 
 ## Running the Game
 
@@ -15,6 +15,10 @@ godot --path .           # Run the game directly
 ```
 
 ## Architecture
+
+**Autoload Singletons (project.godot):**
+- `UIManager` (UIManagerClass) - Global UI access: toasts, message boxes, pause menu, help screen, countdown timer
+- `GameManager` (GameManagerClass) - Win condition tracking, table discovery, debug functions
 
 **Scene Hierarchy:**
 - `scenes/main.tscn` - Entry point containing ground TileMapLayers, TableGroup, Player, and PlantTray instances
@@ -32,11 +36,19 @@ godot --path .           # Run the game directly
 - `Table` emits `tray_placed(table, slot, tray)` and `tray_removed(table, slot, tray)` when trays are placed/removed
 - `PlantTray` emits `growth_changed(tray, growth_stage)` and `fully_grown(tray)` during growth progression
 - `TraySpawner` emits `tray_spawned(tray)` and `spawn_failed(reason)` for spawn events
+- `GameManager` emits `game_won` when win condition met
+
+**Input Actions:**
+- Arrow keys: Movement (200 px/sec)
+- Space (ui_select): Pick up/drop trays
+- ESC (ui_cancel): Pause menu
+- F1 (show_help): Help screen
+- F6 (debug_fill_trays): Fill all empty slots with trays
+- F7 (debug_grow_trays): Instantly grow all trays to maturity
 
 **Player Mechanics (player.gd):**
-- Movement: Arrow keys at 200 px/sec
 - TrayRay (RayCast2D) detects PlantTrays (layer 2) and TableTraySlots (layer 3) in front of player
-- ui_select action picks up/drops trays; trays can only be dropped on unoccupied TableTraySlots
+- Trays can only be dropped on unoccupied TableTraySlots
 - Shader color feedback: orange (can carry), green (can drop), red (carrying)
 
 **Plant Growth System:**
@@ -46,9 +58,16 @@ godot --path .           # Run the game directly
 - PlantTray tracks its current table via `set_current_table()`/`get_current_table()`
 
 **Table Slot Management:**
+- Tables must be in the "tables" group for GameManager auto-discovery
 - Tables track occupied slots via `occupied_slots` dictionary (slot_name -> PlantTray)
-- Methods: `is_slot_occupied()`, `get_empty_slots()`, `place_tray_in_slot()`, `remove_tray()`
+- Methods: `is_slot_occupied()`, `get_empty_slots()`, `place_tray_in_slot()`, `remove_tray()`, `get_all_trays()`
 - Slots are named `TraySlot1` through `TraySlot6` as Area2D children of Table
+
+**UI System (via UIManager singleton):**
+- `show_message(text, button_text)` - Modal dialog, emits `dismissed` signal
+- `show_toast(text, duration)` - Temporary notification
+- `start_countdown(duration, message)` / `update_countdown()` / `stop_countdown()` - Timer display
+- `show_pause_menu()` / `show_help()` - Overlay screens
 
 **Assets:**
 - `assets/sprites/` - Organized by entity type (player, table, plant, ground)
