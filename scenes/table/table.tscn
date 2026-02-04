@@ -31,6 +31,7 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot1"]
+visible = false
 shape = SubResource("CircleShape2D_qavd0")
 
 [node name="TraySlot2" type="Area2D" parent="."]
@@ -39,6 +40,7 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot2"]
+visible = false
 shape = SubResource("CircleShape2D_qavd0")
 
 [node name="TraySlot3" type="Area2D" parent="."]
@@ -47,6 +49,7 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot3"]
+visible = false
 shape = SubResource("CircleShape2D_qavd0")
 
 [node name="TraySlot4" type="Area2D" parent="."]
@@ -55,6 +58,7 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot4"]
+visible = false
 shape = SubResource("CircleShape2D_qavd0")
 
 [node name="TraySlot5" type="Area2D" parent="."]
@@ -63,6 +67,7 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot5"]
+visible = false
 shape = SubResource("CircleShape2D_qavd0")
 
 [node name="TraySlot6" type="Area2D" parent="."]
@@ -71,4 +76,5 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TraySlot6"]
+visible = false
 shape = SubResource("CircleShape2D_qavd0")

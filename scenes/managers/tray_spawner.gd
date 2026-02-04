@@ -49,11 +49,13 @@ func try_auto_spawn() -> void:
 		return
 	if spawn_table.get_tray_count() >= max_trays_on_spawn_table:
 		spawn_failed.emit("No empty slots on spawn table")
-		UIManager.show_toast("No empty slots on spawn table")
+		if not _are_all_slots_full():
+			UIManager.show_toast("No empty slots on spawn table")
 		_spawn_paused = true
 		UIManager.stop_countdown()
 		_countdown_active = false
 		return
+		
 	spawn_tray()
 
 func spawn_tray() -> PlantTray:	
@@ -68,7 +70,8 @@ func spawn_tray() -> PlantTray:
 	var empty_slots = spawn_table.get_empty_slots()
 	if empty_slots.is_empty():
 		spawn_failed.emit("No empty slots on spawn table")
-		UIManager.show_toast("No empty slots on spawn table")
+		if not _are_all_slots_full():
+			UIManager.show_toast("No empty slots on spawn table")
 		return null
 
 	# Spawn in the first empty slot
@@ -126,3 +129,8 @@ func _on_spawn_table_tray_removed(_table: Table, _slot: Area2D, _tray: PlantTray
 	if _spawn_paused and auto_spawn_enabled:
 		_spawn_paused = false
 		_spawn_timer = 0.0
+
+
+func _are_all_slots_full() -> bool:
+	var progress = GameManager.get_progress()
+	return progress.filled_slots >= progress.total_slots

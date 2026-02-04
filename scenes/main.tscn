@@ -26,26 +26,26 @@ y_sort_enabled = true
 texture_filter = 1
 
 [node name="Table1" parent="TableGroup" instance=ExtResource("2_0wfyh")]
-position = Vector2(575, 195)
+position = Vector2(585, 195)
 light_level = 1.2
 temperature = 22.0
 
 [node name="Table2" parent="TableGroup" instance=ExtResource("2_0wfyh")]
-position = Vector2(575, 50)
+position = Vector2(573, 50)
 table_id = 2
 light_level = 0.8
 temperature = 18.0
 humidity = 0.7
 
 [node name="Table3" parent="TableGroup" instance=ExtResource("2_0wfyh")]
-position = Vector2(190, 50)
+position = Vector2(195, 50)
 table_id = 3
 light_level = 1.5
 temperature = 25.0
 humidity = 0.3
 
 [node name="Table4" parent="TableGroup" instance=ExtResource("2_0wfyh")]
-position = Vector2(190, 195)
+position = Vector2(182, 195)
 table_id = 4
 light_level = 0.6
 temperature = 15.0

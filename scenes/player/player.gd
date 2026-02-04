@@ -91,36 +91,51 @@ func _physics_process(_delta):
 							tray_table.remove_tray(carryTray)
 			else:
 				smartPrint(2, "carrying tray")
+
+	var stopped = true
+	if last_pos != self.position:
+		last_pos = self.position
+		stopped = false
 	
 	# PlayerSprite motion and animations
 	var direction = Vector2.ZERO
 	if Input.is_action_pressed("ui_down"):
 		direction = Vector2.DOWN
 		ray.set_target_position(ray_down)
-		if collided:
+		if stopped:
 			playerSprite.play("stop-down")
 		else:
 			playerSprite.play("walk-down")
 	elif Input.is_action_pressed("ui_up"):
 		direction = Vector2.UP
 		ray.set_target_position(ray_up)
-		if collided:
+		if stopped:
 			playerSprite.play("stop-up")
 		else:
 			playerSprite.play("walk-up")
 	elif Input.is_action_pressed("ui_left"):
 		direction = Vector2.LEFT
 		ray.set_target_position(ray_left)
-		playerSprite.play("walk-left")
+		if stopped:
+			playerSprite.play("stop-left")
+		else:
+			playerSprite.play("walk-left")
 	elif Input.is_action_pressed("ui_right"):
 		direction = Vector2.RIGHT
 		ray.set_target_position(ray_right)
-		playerSprite.play("walk-right")
+		if stopped:
+			playerSprite.play("stop-right")
+		else:
+			playerSprite.play("walk-right")
 	else:
 		if last_dir == Vector2.UP:
 			playerSprite.play("stop-up")
 		elif last_dir == Vector2.DOWN:
 			playerSprite.play("stop-down")
+		elif last_dir == Vector2.LEFT:
+			playerSprite.play("stop-left")
+		elif last_dir == Vector2.RIGHT:
+			playerSprite.play("stop-right")
 		else:
 			playerSprite.stop()
 		
@@ -147,10 +162,8 @@ func _physics_process(_delta):
 				drop_table.place_tray_in_slot(hit_tray_slot, carryTray)
 				carryTray = null
 			else:
-				print("can only drop tray on table")
+				smartPrint(2, "can only drop tray on table")
 			
-	if last_pos != self.position:
-		last_pos = self.position
 	# setup the actual movement
 	velocity = (direction * speed)
 	
