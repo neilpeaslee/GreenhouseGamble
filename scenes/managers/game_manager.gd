@@ -33,6 +33,8 @@ func _find_and_connect_tables() -> void:
 
 	# Connect to any existing trays on tables
 	for table in _tables:
+		if not is_instance_valid(table):
+			continue
 		for tray in table.get_all_trays():
 			_connect_tray(tray)
 
@@ -80,6 +82,8 @@ func _check_win_condition() -> void:
 	var fully_grown_count: int = 0
 
 	for table in _tables:
+		if not is_instance_valid(table):
+			continue
 		var trays = table.get_all_trays()
 		total_trays += trays.size()
 		for tray in trays:
@@ -102,7 +106,13 @@ func _trigger_win() -> void:
 
 func _on_play_again() -> void:
 	_game_won = false
+	_tables.clear()
+	_total_slots = 0
 	get_tree().reload_current_scene()
+	# Wait for new scene to load, then re-find tables
+	await get_tree().tree_changed
+	await get_tree().process_frame
+	_find_and_connect_tables()
 
 
 func get_progress() -> Dictionary:
@@ -110,6 +120,8 @@ func get_progress() -> Dictionary:
 	var fully_grown_count: int = 0
 
 	for table in _tables:
+		if not is_instance_valid(table):
+			continue
 		var trays = table.get_all_trays()
 		total_trays += trays.size()
 		for tray in trays:
@@ -145,6 +157,8 @@ func _input(event: InputEvent) -> void:
 
 func debug_fill_all_slots() -> void:
 	for table in _tables:
+		if not is_instance_valid(table):
+			continue
 		for slot in table.get_empty_slots():
 			var tray = PlantTrayScene.instantiate() as PlantTray
 			get_tree().current_scene.add_child(tray)
@@ -155,6 +169,8 @@ func debug_fill_all_slots() -> void:
 
 func debug_grow_all_trays() -> void:
 	for table in _tables:
+		if not is_instance_valid(table):
+			continue
 		for tray in table.get_all_trays():
 			if tray is PlantTray and not tray.is_fully_grown:
 				tray.growth_progress = tray.max_growth_stages
