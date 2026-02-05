@@ -6,12 +6,14 @@ const ToastScene = preload("res://scenes/ui/toast.tscn")
 const CountdownTimerScene = preload("res://scenes/ui/countdown_timer.tscn")
 const PauseMenuScene = preload("res://scenes/ui/pause_menu.tscn")
 const HelpScreenScene = preload("res://scenes/ui/help_screen.tscn")
+const TableInfoScene = preload("res://scenes/ui/table_info.tscn")
 
 var _message_box: MessageBox
 var _toast: Toast
 var _countdown_timer: CountdownTimer
 var _pause_menu: PauseMenu
 var _help_screen: HelpScreen
+var _table_info: TableInfo
 
 
 func _ready() -> void:
@@ -29,6 +31,9 @@ func _ready() -> void:
 
 	_help_screen = HelpScreenScene.instantiate()
 	add_child(_help_screen)
+
+	_table_info = TableInfoScene.instantiate()
+	add_child(_table_info)
 
 
 func show_message(text: String, button_text: String = "OK") -> void:
@@ -93,3 +98,15 @@ func is_help_visible() -> bool:
 
 func get_help_screen() -> HelpScreen:
 	return _help_screen
+
+
+func show_table_info(table: Table) -> void:
+	_table_info.show_info(table)
+
+
+func hide_table_info() -> void:
+	_table_info.hide_info()
+
+
+func get_table_info() -> TableInfo:
+	return _table_info

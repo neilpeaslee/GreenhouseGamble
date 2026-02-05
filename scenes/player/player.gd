@@ -27,6 +27,11 @@ var carryingShader = Vector4(0.976, 0.184, 0.208, 1.0) #red
 var debug = false
 var smartString = ["", "", "", "", ""] # debugging
 
+# Table info display
+var table_collision_time: float = 0.0
+var collided_table: Table = null
+const TABLE_INFO_DELAY: float = 1.0
+
 func _ready():
 	playerSprite = $Sprite
 	 
@@ -40,7 +45,7 @@ func smartPrint(index, string):
 		print(str(index) + " " + string)
 		smartString.set(index, string)
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	var collider
 	var hit_plant_sprite = null
 	var hit_tray_slot = null
@@ -169,3 +174,26 @@ func _physics_process(_delta):
 	
 	move_and_slide()
 	collided = get_slide_collision_count()
+
+	# Table info display logic
+	var current_table: Table = null
+	for i in range(collided):
+		var collision = get_slide_collision(i)
+		var collider_obj = collision.get_collider()
+		if collider_obj is Table:
+			current_table = collider_obj
+			break
+
+	if current_table and stopped:
+		if collided_table == current_table:
+			table_collision_time += delta
+			if table_collision_time >= TABLE_INFO_DELAY:
+				UIManager.show_table_info(current_table)
+		else:
+			collided_table = current_table
+			table_collision_time = 0.0
+	else:
+		if collided_table:
+			UIManager.hide_table_info()
+			collided_table = null
+			table_collision_time = 0.0

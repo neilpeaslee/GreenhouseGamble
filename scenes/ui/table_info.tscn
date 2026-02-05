@@ -1,0 +1,83 @@
+[gd_scene load_steps=2 format=3 uid="uid://qgndsga507k2"]
+
+[ext_resource type="Script" uid="uid://cjftxuh4i1q6i" path="res://scenes/ui/table_info.gd" id="1_script"]
+
+[node name="TableInfo" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_script")
+
+[node name="Panel" type="PanelContainer" parent="."]
+offset_top = 382.0
+offset_right = 768.0
+offset_bottom = 432.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="HBox" type="HBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 67
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="Panel/MarginContainer/HBox"]
+layout_mode = 2
+text = "Table 1"
+
+[node name="LightRow" type="HBoxContainer" parent="Panel/MarginContainer/HBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="LightLabel" type="Label" parent="Panel/MarginContainer/HBox/LightRow"]
+layout_mode = 2
+text = "Lux"
+
+[node name="LightBar" type="ProgressBar" parent="Panel/MarginContainer/HBox/LightRow"]
+custom_minimum_size = Vector2(60, 14)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 2.0
+value = 1.0
+show_percentage = false
+
+[node name="TempRow" type="HBoxContainer" parent="Panel/MarginContainer/HBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="TempLabel" type="Label" parent="Panel/MarginContainer/HBox/TempRow"]
+layout_mode = 2
+text = "deg F"
+
+[node name="TempBar" type="ProgressBar" parent="Panel/MarginContainer/HBox/TempRow"]
+custom_minimum_size = Vector2(60, 14)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 50.0
+value = 20.0
+show_percentage = false
+
+[node name="HumidRow" type="HBoxContainer" parent="Panel/MarginContainer/HBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="HumidLabel" type="Label" parent="Panel/MarginContainer/HBox/HumidRow"]
+layout_mode = 2
+text = "RH%"
+
+[node name="HumidBar" type="ProgressBar" parent="Panel/MarginContainer/HBox/HumidRow"]
+custom_minimum_size = Vector2(60, 14)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="TraysLabel" type="Label" parent="Panel/MarginContainer/HBox"]
+layout_mode = 2
+text = "Trays: 0/6"
