@@ -5,12 +5,10 @@ signal countdown_finished
 signal countdown_tick(time_remaining: float)
 
 @onready var panel: PanelContainer = $Panel
-@onready var label: Label = $Panel/MarginContainer/VBoxContainer/Label
-@onready var time_label: Label = $Panel/MarginContainer/VBoxContainer/TimeLabel
+@onready var time_label: Label = $Panel/MarginContainer/TimeLabel
 
 var _time_remaining: float = 0.0
 var _is_running: bool = false
-var _message: String = "Next spawn in:"
 
 
 func _ready() -> void:
@@ -33,18 +31,15 @@ func _process(delta: float) -> void:
 		_update_display()
 
 
-func start_countdown(duration: float, message: String = "Next spawn in:") -> void:
+func start_countdown(duration: float, _message: String = "") -> void:
 	_time_remaining = duration
-	_message = message
 	_is_running = true
 	_update_display()
 	show()
 
 
-func update_time(time_remaining: float, message: String = "") -> void:
+func update_time(time_remaining: float, _message: String = "") -> void:
 	_time_remaining = time_remaining
-	if message != "":
-		_message = message
 	_update_display()
 	if not visible:
 		show()
@@ -74,5 +69,4 @@ func is_running() -> bool:
 
 
 func _update_display() -> void:
-	label.text = _message
 	time_label.text = "%d" % ceili(_time_remaining)
