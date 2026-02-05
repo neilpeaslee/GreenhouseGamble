@@ -32,6 +32,11 @@ var table_collision_time: float = 0.0
 var collided_table: Table = null
 const TABLE_INFO_DELAY: float = 1.0
 
+# Tray info display
+var tray_view_time: float = 0.0
+var viewed_tray: PlantTray = null
+const TRAY_INFO_DELAY: float = 0.5
+
 func _ready():
 	playerSprite = $Sprite
 	 
@@ -49,6 +54,7 @@ func _physics_process(delta):
 	var collider
 	var hit_plant_sprite = null
 	var hit_tray_slot = null
+	var hit_tray: PlantTray = null
 	var select_action = Input.is_action_just_pressed("ui_select")
 	
 	# Table/TraySlot1/CollisionShape2D
@@ -81,6 +87,7 @@ func _physics_process(delta):
 		# children() Tray /PlantTray/PlantSprite or Table /Table/TableSprite
 		elif collider.has_node("PlantSprite"):
 			hit_plant_sprite = collider.get_node("PlantSprite")
+			hit_tray = collider as PlantTray
 			if !carryTray:
 				hit_plant_sprite.use_parent_material = true
 				smartPrint(2, "not carrying tray")
@@ -184,7 +191,25 @@ func _physics_process(delta):
 			current_table = collider_obj
 			break
 
-	if current_table and stopped:
+	# Tray info display logic (check first, takes priority over table info)
+	var showing_tray_info = false
+	if hit_tray and !carryTray and stopped:
+		if viewed_tray == hit_tray:
+			tray_view_time += delta
+			if tray_view_time >= TRAY_INFO_DELAY:
+				UIManager.show_tray_info(hit_tray)
+				showing_tray_info = true
+		else:
+			viewed_tray = hit_tray
+			tray_view_time = 0.0
+	else:
+		if viewed_tray:
+			UIManager.hide_tray_info()
+			viewed_tray = null
+			tray_view_time = 0.0
+
+	# Table info display logic (only if tray info is not showing)
+	if current_table and stopped and not showing_tray_info:
 		if collided_table == current_table:
 			table_collision_time += delta
 			if table_collision_time >= TABLE_INFO_DELAY:

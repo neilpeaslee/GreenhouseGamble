@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj2x8qk5v7m3p"]
+
+[ext_resource type="Script" uid="uid://c4r2yh7m8k6np" path="res://scenes/ui/tray_info.gd" id="1_script"]
+
+[node name="TrayInfo" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_script")
+
+[node name="Panel" type="PanelContainer" parent="."]
+offset_top = 382.0
+offset_right = 768.0
+offset_bottom = 432.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="HBox" type="HBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="Panel/MarginContainer/HBox"]
+layout_mode = 2
+text = "Tray"
+
+[node name="GrowthRow" type="HBoxContainer" parent="Panel/MarginContainer/HBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="GrowthLabel" type="Label" parent="Panel/MarginContainer/HBox/GrowthRow"]
+layout_mode = 2
+text = "Growth"
+
+[node name="GrowthBar" type="ProgressBar" parent="Panel/MarginContainer/HBox/GrowthRow"]
+custom_minimum_size = Vector2(80, 14)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 100.0
+value = 50.0
+show_percentage = false
+
+[node name="StageLabel" type="Label" parent="Panel/MarginContainer/HBox"]
+layout_mode = 2
+text = "Stage 0/5"
+
+[node name="EfficiencyRow" type="HBoxContainer" parent="Panel/MarginContainer/HBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="EfficiencyLabel" type="Label" parent="Panel/MarginContainer/HBox/EfficiencyRow"]
+layout_mode = 2
+text = "Efficiency"
+
+[node name="EfficiencyBar" type="ProgressBar" parent="Panel/MarginContainer/HBox/EfficiencyRow"]
+custom_minimum_size = Vector2(60, 14)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 100.0
+value = 75.0
+show_percentage = false

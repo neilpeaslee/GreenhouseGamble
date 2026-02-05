@@ -7,6 +7,7 @@ const CountdownTimerScene = preload("res://scenes/ui/countdown_timer.tscn")
 const PauseMenuScene = preload("res://scenes/ui/pause_menu.tscn")
 const HelpScreenScene = preload("res://scenes/ui/help_screen.tscn")
 const TableInfoScene = preload("res://scenes/ui/table_info.tscn")
+const TrayInfoScene = preload("res://scenes/ui/tray_info.tscn")
 
 var _message_box: MessageBox
 var _toast: Toast
@@ -14,6 +15,7 @@ var _countdown_timer: CountdownTimer
 var _pause_menu: PauseMenu
 var _help_screen: HelpScreen
 var _table_info: TableInfo
+var _tray_info: TrayInfo
 
 
 func _ready() -> void:
@@ -34,6 +36,9 @@ func _ready() -> void:
 
 	_table_info = TableInfoScene.instantiate()
 	add_child(_table_info)
+
+	_tray_info = TrayInfoScene.instantiate()
+	add_child(_tray_info)
 
 
 func show_message(text: String, button_text: String = "OK") -> void:
@@ -110,3 +115,15 @@ func hide_table_info() -> void:
 
 func get_table_info() -> TableInfo:
 	return _table_info
+
+
+func show_tray_info(tray: PlantTray) -> void:
+	_tray_info.show_info(tray)
+
+
+func hide_tray_info() -> void:
+	_tray_info.hide_info()
+
+
+func get_tray_info() -> TrayInfo:
+	return _tray_info

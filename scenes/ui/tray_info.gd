@@ -1,15 +1,14 @@
 extends CanvasLayer
-class_name TableInfo
+class_name TrayInfo
 
 @onready var panel: PanelContainer = $Panel
 @onready var title_label: Label = $Panel/MarginContainer/HBox/TitleLabel
-@onready var light_bar: ProgressBar = $Panel/MarginContainer/HBox/LightRow/LightBar
-@onready var temp_bar: ProgressBar = $Panel/MarginContainer/HBox/TempRow/TempBar
-@onready var humid_bar: ProgressBar = $Panel/MarginContainer/HBox/HumidRow/HumidBar
-@onready var trays_label: Label = $Panel/MarginContainer/HBox/TraysLabel
+@onready var growth_bar: ProgressBar = $Panel/MarginContainer/HBox/GrowthRow/GrowthBar
+@onready var stage_label: Label = $Panel/MarginContainer/HBox/StageLabel
+@onready var efficiency_bar: ProgressBar = $Panel/MarginContainer/HBox/EfficiencyRow/EfficiencyBar
 
 var _tween: Tween
-var _current_table: Table
+var _current_tray: PlantTray
 
 
 func _ready() -> void:
@@ -18,15 +17,16 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if visible and _current_table:
+	if visible and _current_tray:
 		_update_values()
 
 
-func show_info(table: Table) -> void:
-	if _current_table == table and visible:
+func show_info(tray: PlantTray) -> void:
+	if _current_tray == tray and visible:
+		_update_values()
 		return
 
-	_current_table = table
+	_current_tray = tray
 	_update_values()
 	show()
 
@@ -50,7 +50,7 @@ func hide_info() -> void:
 	if not visible:
 		return
 
-	_current_table = null
+	_current_tray = null
 
 	if _tween and _tween.is_valid():
 		_tween.kill()
@@ -66,18 +66,20 @@ func hide_info() -> void:
 
 
 func _update_values() -> void:
-	if not _current_table:
+	if not _current_tray:
 		return
 
-	title_label.text = "Table %d" % _current_table.table_id
-	light_bar.value = _current_table.light_level
-	temp_bar.value = _current_table.temperature
-	humid_bar.value = _current_table.humidity
+	if _current_tray.is_fully_grown:
+		title_label.text = "Tray (Mature)"
+	else:
+		title_label.text = "Tray"
 
-	var tray_count = _current_table.get_tray_count()
-	var total_slots = 6
-	trays_label.text = "Trays: %d/%d" % [tray_count, total_slots]
+	growth_bar.value = _current_tray.get_growth_percentage()
+	stage_label.text = "Stage %d/%d" % [_current_tray.growth_stage, _current_tray.max_growth_stages]
+
+	var efficiency = _current_tray.calculate_growth_modifier() * 100.0
+	efficiency_bar.value = efficiency
 
 
-func get_current_table() -> Table:
-	return _current_table
+func get_current_tray() -> PlantTray:
+	return _current_tray
