@@ -105,8 +105,8 @@ func get_help_screen() -> HelpScreen:
 	return _help_screen
 
 
-func show_table_info(table: Table) -> void:
-	_table_info.show_info(table)
+func show_table_info(table: Table, tray: PlantTray = null) -> void:
+	_table_info.show_info(table, tray)
 
 
 func hide_table_info() -> void:

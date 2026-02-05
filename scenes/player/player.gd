@@ -213,7 +213,7 @@ func _physics_process(delta):
 		if collided_table == current_table:
 			table_collision_time += delta
 			if table_collision_time >= TABLE_INFO_DELAY:
-				UIManager.show_table_info(current_table)
+				UIManager.show_table_info(current_table, carryTray)
 		else:
 			collided_table = current_table
 			table_collision_time = 0.0

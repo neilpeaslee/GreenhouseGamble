@@ -23,7 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="PanelContainer" parent="CenterContainer"]
-custom_minimum_size = Vector2(350, 250)
+custom_minimum_size = Vector2(400, 320)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Panel"]
@@ -49,8 +49,7 @@ layout_mode = 2
 layout_mode = 2
 text = "Arrow Keys - Move
 Space - Pick up / Drop tray
-
-ESC - Pause game
+ESC - Pause menu
 F1 - This help screen"
 
 [node name="HSeparator2" type="HSeparator" parent="CenterContainer/Panel/MarginContainer/VBoxContainer"]
@@ -58,9 +57,21 @@ layout_mode = 2
 
 [node name="GoalLabel" type="Label" parent="CenterContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Goal: Fill all tables with plant trays
-and grow them to full maturity!"
+text = "Goal: Fill all table slots with fully grown plants!"
 horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="CenterContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TipsLabel" type="Label" parent="CenterContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Tips:
+- Plants only grow when placed on tables
+- Match table conditions to plant preferences
+- Stand still near a tray to see its info
+- Stand against a table to see its conditions
+- While carrying, table info shows ideal ranges"
 autowrap_mode = 2
 
 [node name="CloseButton" type="Button" parent="CenterContainer/Panel/MarginContainer/VBoxContainer"]

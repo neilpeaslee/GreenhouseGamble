@@ -52,7 +52,7 @@ godot --path .           # Run the game directly
 - TrayRay (RayCast2D) detects PlantTrays (layer 2) and TableTraySlots (layer 3) in front of player
 - Trays can only be dropped on unoccupied TableTraySlots
 - Shader color feedback: orange (can carry), green (can drop), red (carrying)
-- Info display: standing still near a tray for 0.5s shows TrayInfo; colliding with a table for 1s shows TableInfo
+- Info display: standing still near a tray for 0.5s shows TrayInfo; colliding with a table for 1s shows TableInfo (with preference range markers if carrying a tray)
 
 **Plant Growth System:**
 - PlantTray grows only when placed on a Table (growth_modifier = 0 when not on table)
@@ -66,7 +66,7 @@ godot --path .           # Run the game directly
 - Tables must be in the "tables" group for GameManager auto-discovery
 - Each Table has `table_id` export for identification in UI
 - Tables track occupied slots via `occupied_slots` dictionary (slot_name -> PlantTray)
-- Methods: `is_slot_occupied()`, `get_empty_slots()`, `place_tray_in_slot()`, `remove_tray()`, `get_all_trays()`, `get_tray_count()`
+- Methods: `is_slot_occupied()`, `get_empty_slots()`, `get_occupied_slots()`, `place_tray_in_slot()`, `remove_tray()`, `get_all_trays()`, `get_tray_count()`
 - Slots are named `TraySlot1` through `TraySlot6` as Area2D children of Table
 
 **UI System (via UIManager singleton):**
@@ -74,7 +74,7 @@ godot --path .           # Run the game directly
 - `show_toast(text, duration)` - Temporary notification
 - `start_countdown(duration, message)` / `update_countdown()` / `stop_countdown()` - Timer display
 - `show_pause_menu()` / `show_help()` - Overlay screens
-- `show_table_info(table)` / `hide_table_info()` - Animated stat bar for table properties
+- `show_table_info(table, tray=null)` / `hide_table_info()` - Animated stat bar for table properties; when tray is provided, displays preference range markers on environment bars
 - `show_tray_info(tray)` / `hide_tray_info()` - Animated stat bar for tray growth status
 
 **Assets:**

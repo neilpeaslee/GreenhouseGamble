@@ -13,14 +13,14 @@ offset_bottom = 432.0
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 2
-theme_override_constants/margin_left = 16
+theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 16
+theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="HBox" type="HBoxContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 67
+theme_override_constants/separation = 16
 alignment = 1
 
 [node name="TitleLabel" type="Label" parent="Panel/MarginContainer/HBox"]
@@ -37,12 +37,30 @@ layout_mode = 2
 text = "Lux"
 
 [node name="LightBar" type="ProgressBar" parent="Panel/MarginContainer/HBox/LightRow"]
-custom_minimum_size = Vector2(60, 14)
+custom_minimum_size = Vector2(140, 14)
 layout_mode = 2
 size_flags_vertical = 4
 max_value = 2.0
 value = 1.0
 show_percentage = false
+
+[node name="LowMarker" type="ColorRect" parent="Panel/MarginContainer/HBox/LightRow/LightBar"]
+z_index = 1
+custom_minimum_size = Vector2(2, 14)
+layout_mode = 0
+offset_left = 35.0
+offset_right = 37.0
+offset_bottom = 14.0
+color = Color(1, 1, 0, 0.8)
+
+[node name="HighMarker" type="ColorRect" parent="Panel/MarginContainer/HBox/LightRow/LightBar"]
+z_index = 1
+custom_minimum_size = Vector2(2, 14)
+layout_mode = 0
+offset_left = 105.0
+offset_right = 107.0
+offset_bottom = 14.0
+color = Color(1, 1, 0, 0.8)
 
 [node name="TempRow" type="HBoxContainer" parent="Panel/MarginContainer/HBox"]
 layout_mode = 2
@@ -54,12 +72,30 @@ layout_mode = 2
 text = "deg F"
 
 [node name="TempBar" type="ProgressBar" parent="Panel/MarginContainer/HBox/TempRow"]
-custom_minimum_size = Vector2(60, 14)
+custom_minimum_size = Vector2(140, 14)
 layout_mode = 2
 size_flags_vertical = 4
 max_value = 50.0
 value = 20.0
 show_percentage = false
+
+[node name="LowMarker" type="ColorRect" parent="Panel/MarginContainer/HBox/TempRow/TempBar"]
+z_index = 1
+custom_minimum_size = Vector2(2, 14)
+layout_mode = 0
+offset_left = 35.0
+offset_right = 37.0
+offset_bottom = 14.0
+color = Color(1, 1, 0, 0.8)
+
+[node name="HighMarker" type="ColorRect" parent="Panel/MarginContainer/HBox/TempRow/TempBar"]
+z_index = 1
+custom_minimum_size = Vector2(2, 14)
+layout_mode = 0
+offset_left = 105.0
+offset_right = 107.0
+offset_bottom = 14.0
+color = Color(1, 1, 0, 0.8)
 
 [node name="HumidRow" type="HBoxContainer" parent="Panel/MarginContainer/HBox"]
 layout_mode = 2
@@ -71,12 +107,30 @@ layout_mode = 2
 text = "RH%"
 
 [node name="HumidBar" type="ProgressBar" parent="Panel/MarginContainer/HBox/HumidRow"]
-custom_minimum_size = Vector2(60, 14)
+custom_minimum_size = Vector2(140, 14)
 layout_mode = 2
 size_flags_vertical = 4
 max_value = 1.0
 value = 0.5
 show_percentage = false
+
+[node name="LowMarker" type="ColorRect" parent="Panel/MarginContainer/HBox/HumidRow/HumidBar"]
+z_index = 1
+custom_minimum_size = Vector2(2, 14)
+layout_mode = 0
+offset_left = 35.0
+offset_right = 37.0
+offset_bottom = 14.0
+color = Color(1, 1, 0, 0.8)
+
+[node name="HighMarker" type="ColorRect" parent="Panel/MarginContainer/HBox/HumidRow/HumidBar"]
+z_index = 1
+custom_minimum_size = Vector2(2, 14)
+layout_mode = 0
+offset_left = 105.0
+offset_right = 107.0
+offset_bottom = 14.0
+color = Color(1, 1, 0, 0.8)
 
 [node name="TraysLabel" type="Label" parent="Panel/MarginContainer/HBox"]
 layout_mode = 2
