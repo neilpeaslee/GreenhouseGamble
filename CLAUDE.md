@@ -26,6 +26,8 @@ godot --path .           # Run the game directly
 - `scenes/table/table.tscn` + `table.gd` - Table (class_name: `Table`) with TraySlot Area2D nodes for placing plant trays
 - `scenes/plant/plantTray.tscn` + `plant_tray.gd` - PlantTray (class_name: `PlantTray`) carriable objects with growth simulation
 - `scenes/managers/tray_spawner.gd` - TraySpawner (class_name: `TraySpawner`) manages automatic/manual tray creation
+- `scenes/ui/table_info.gd` + `table_info.tscn` - TableInfo (class_name: `TableInfo`) stat bar showing table properties
+- `scenes/ui/tray_info.gd` + `tray_info.tscn` - TrayInfo (class_name: `TrayInfo`) stat bar showing tray growth info
 
 **Physics Layers (defined in project.godot):**
 - Layer 1: Environment - walls and obstacles
@@ -50,17 +52,21 @@ godot --path .           # Run the game directly
 - TrayRay (RayCast2D) detects PlantTrays (layer 2) and TableTraySlots (layer 3) in front of player
 - Trays can only be dropped on unoccupied TableTraySlots
 - Shader color feedback: orange (can carry), green (can drop), red (carrying)
+- Info display: standing still near a tray for 0.5s shows TrayInfo; colliding with a table for 1s shows TableInfo
 
 **Plant Growth System:**
 - PlantTray grows only when placed on a Table (growth_modifier = 0 when not on table)
 - Growth rate affected by Table's environment properties: `light_level`, `temperature`, `humidity`
+- Each PlantTray has `preferred_light`, `preferred_temperature`, `preferred_humidity` exports (Optimal Conditions group)
+- Growth modifier calculated by comparing table conditions to tray preferences with tolerance factors
 - 6 growth stages (frames 0-5); sprite frame updates automatically with growth_stage
 - PlantTray tracks its current table via `set_current_table()`/`get_current_table()`
 
 **Table Slot Management:**
 - Tables must be in the "tables" group for GameManager auto-discovery
+- Each Table has `table_id` export for identification in UI
 - Tables track occupied slots via `occupied_slots` dictionary (slot_name -> PlantTray)
-- Methods: `is_slot_occupied()`, `get_empty_slots()`, `place_tray_in_slot()`, `remove_tray()`, `get_all_trays()`
+- Methods: `is_slot_occupied()`, `get_empty_slots()`, `place_tray_in_slot()`, `remove_tray()`, `get_all_trays()`, `get_tray_count()`
 - Slots are named `TraySlot1` through `TraySlot6` as Area2D children of Table
 
 **UI System (via UIManager singleton):**
@@ -68,6 +74,8 @@ godot --path .           # Run the game directly
 - `show_toast(text, duration)` - Temporary notification
 - `start_countdown(duration, message)` / `update_countdown()` / `stop_countdown()` - Timer display
 - `show_pause_menu()` / `show_help()` - Overlay screens
+- `show_table_info(table)` / `hide_table_info()` - Animated stat bar for table properties
+- `show_tray_info(tray)` / `hide_tray_info()` - Animated stat bar for tray growth status
 
 **Assets:**
 - `assets/sprites/` - Organized by entity type (player, table, plant, ground)
