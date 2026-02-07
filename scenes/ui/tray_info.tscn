@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dj2x8qk5v7m3p"]
 
-[ext_resource type="Script" uid="uid://c4r2yh7m8k6np" path="res://scenes/ui/tray_info.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://c5m0dbo5v2dx" path="res://scenes/ui/tray_info.gd" id="1_script"]
 
 [node name="TrayInfo" type="CanvasLayer"]
 layer = 10
@@ -40,7 +40,6 @@ text = "Growth"
 custom_minimum_size = Vector2(80, 14)
 layout_mode = 2
 size_flags_vertical = 4
-max_value = 100.0
 value = 50.0
 show_percentage = false
 
@@ -61,6 +60,5 @@ text = "Efficiency"
 custom_minimum_size = Vector2(60, 14)
 layout_mode = 2
 size_flags_vertical = 4
-max_value = 100.0
 value = 75.0
 show_percentage = false
